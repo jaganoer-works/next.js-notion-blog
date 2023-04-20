@@ -25,14 +25,16 @@ export default function Home({ allPosts }) {
       </Head>
 
       <main className="container w-full mt-16">
-        <h1 className="text-5xl font-medium text-center">Notion Blog🚀</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">
+          Notion Blog🚀
+        </h1>
         {allPosts.map((post) => (
           <div className="mx-4">
             <SinglePost
               title={post.title}
               description={post.description}
               date={post.date}
-              tag={post.tags}
+              tags={post.tags}
               slug={post.slug}
             />
           </div>
