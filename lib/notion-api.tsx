@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
-import { NUMBER_OF_PER_PAGE } from "../constants/constants";
+import { NUMBER_OF_POSTS_PER_PAGE } from "../constants/constants";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -73,17 +73,17 @@ export const getPostTopPage = async (pageSize = 4) => {
 export const getPostByPage = async (page: number) => {
   const allPosts = await getAllPosts();
 
-  const startIndex = (page - 1) * NUMBER_OF_PER_PAGE;
-  const endIndex = startIndex + NUMBER_OF_PER_PAGE;
+  const startIndex = (page - 1) * NUMBER_OF_POSTS_PER_PAGE;
+  const endIndex = startIndex + NUMBER_OF_POSTS_PER_PAGE;
   return allPosts.slice(startIndex, endIndex);
 };
 
 // ページングのための総ページ数を計算する
 export const getNumberOfPages = async () => {
   const allPosts = await getAllPosts();
-  return Math.floor(allPosts.length / NUMBER_OF_PER_PAGE) +
-    (allPosts.length % NUMBER_OF_PER_PAGE) >
-    0
-    ? 1
-    : 0;
+
+  return (
+    Math.floor(allPosts.length / NUMBER_OF_POSTS_PER_PAGE) +
+    (allPosts.length % NUMBER_OF_POSTS_PER_PAGE > 0 ? 1 : 0)
+  );
 };

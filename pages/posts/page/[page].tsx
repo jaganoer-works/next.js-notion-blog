@@ -1,12 +1,17 @@
 import Head from "next/head";
-import { getPostByPage, getPostTopPage } from "../../../lib/notion-api";
+import {
+  getNumberOfPages,
+  getPostByPage,
+  getPostTopPage,
+} from "../../../lib/notion-api";
 import SinglePost from "../../../components/post/single-post";
+import Pagination from "../../../components/pagination/Pagination";
 
 export const getStaticPaths = async () => {
-  const numberOfPage = await getPostTopPage();
+  const numberOfPage = await getNumberOfPages();
 
   let params = [];
-  for (let i = 1; i <= numberOfPage.length; i++) {
+  for (let i = 1; i <= numberOfPage; i++) {
     params.push({ params: { page: i.toString() } });
   }
 
@@ -18,18 +23,19 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: { params: { page: any } }) => {
   const currentPage = context.params?.page;
-
   const postsByPage = await getPostByPage(parseInt(currentPage.toString(), 10));
+  const numberOfPage = await getNumberOfPages();
 
   return {
     props: {
       postsByPage,
+      numberOfPage,
     },
     revalidate: 60 * 60 * 6,
   };
 };
 
-export default function BlogPageList({ postsByPage }) {
+export default function BlogPageList({ postsByPage, numberOfPage }) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -43,7 +49,7 @@ export default function BlogPageList({ postsByPage }) {
         <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
           {postsByPage.map((post) => (
-            <div>
+            <div key={post.id}>
               <SinglePost
                 title={post.title}
                 description={post.description}
@@ -55,6 +61,7 @@ export default function BlogPageList({ postsByPage }) {
             </div>
           ))}
         </section>
+        <Pagination numberOfPage={numberOfPage} />
       </main>
     </div>
   );
