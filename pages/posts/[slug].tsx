@@ -1,5 +1,6 @@
 import React from "react";
 import { getAllPosts, getSingePost } from "../../lib/notion-api";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 export const getStaticPaths = async () => {
   const allPost = await getAllPosts();
@@ -36,7 +37,9 @@ const Post = ({ post }) => {
           {tag}
         </p>
       ))}
-      <div className="mt-10">{post.markdown.parent}</div>
+      <div className="mt-10 font-medium">
+        <ReactMarkdown children={post.markdown.parent} />
+      </div>
     </section>
   );
 };
