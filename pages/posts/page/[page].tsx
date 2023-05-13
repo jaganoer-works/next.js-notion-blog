@@ -3,8 +3,15 @@ import { getPostByPage, getPostTopPage } from "../../../lib/notion-api";
 import SinglePost from "../../../components/post/single-post";
 
 export const getStaticPaths = async () => {
+  const numberOfPage = await getPostTopPage();
+
+  let params = [];
+  for (let i = 1; i <= numberOfPage.length; i++) {
+    params.push({ params: { page: i.toString() } });
+  }
+
   return {
-    paths: [{ params: { page: "1" } }, { params: { page: "2" } }],
+    paths: params,
     fallback: "blocking",
   };
 };

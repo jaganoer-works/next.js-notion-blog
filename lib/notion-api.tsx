@@ -77,3 +77,13 @@ export const getPostByPage = async (page: number) => {
   const endIndex = startIndex + NUMBER_OF_PER_PAGE;
   return allPosts.slice(startIndex, endIndex);
 };
+
+// ページングのための総ページ数を計算する
+export const getNumberOfPages = async () => {
+  const allPosts = await getAllPosts();
+  return Math.floor(allPosts.length / NUMBER_OF_PER_PAGE) +
+    (allPosts.length % NUMBER_OF_PER_PAGE) >
+    0
+    ? 1
+    : 0;
+};
