@@ -61,3 +61,10 @@ export const getSingePost = async (slug) => {
     markdown: mbString,
   };
 };
+
+export const getPostTopPage = async (pageSize = 4) => {
+  const allPosts = await getAllPosts();
+  const forPosts = allPosts.slice(0, pageSize);
+
+  return forPosts;
+};

@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { getAllPosts } from "../lib/notion-api";
+import { getPostTopPage } from "../lib/notion-api";
 import SinglePost from "../components/post/single-post";
 
 export const getStaticProps = async () => {
-  const allPosts = await getAllPosts();
+  const allPosts = await getPostTopPage();
 
   return {
     props: {
@@ -14,7 +14,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ allPosts }) {
-  console.log(allPosts);
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
