@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { getPostTopPage } from "../lib/notion-api";
 import SinglePost from "../components/post/single-post";
+import Link from "next/link";
 
 export const getStaticProps = async () => {
   const allPosts = await getPostTopPage();
@@ -35,9 +36,17 @@ export default function Home({ allPosts }) {
               date={post.date}
               tags={post.tags}
               slug={post.slug}
+              isPagination={false}
             />
           </div>
         ))}
+
+        <Link
+          href="/posts/page/1"
+          className="mb-6 lg:w-1/2 mx-auto px-5 block text-right"
+        >
+          ...もっと見る
+        </Link>
       </main>
     </div>
   );
