@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getPostTopPage } from "../../../lib/notion-api";
+import { getPostByPage, getPostTopPage } from "../../../lib/notion-api";
 import SinglePost from "../../../components/post/single-post";
 
 export const getStaticPaths = async () => {
@@ -9,18 +9,20 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async () => {
-  const allPosts = await getPostTopPage();
+export const getStaticProps = async (context: { params: { page: any } }) => {
+  const currentPage = context.params?.page;
+
+  const postsByPage = await getPostByPage(parseInt(currentPage.toString(), 10));
 
   return {
     props: {
-      allPosts,
+      postsByPage,
     },
-    revalidate: 10,
+    revalidate: 60 * 60 * 6,
   };
 };
 
-export default function BlogPageList({ allPosts }) {
+export default function BlogPageList({ postsByPage }) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -33,7 +35,7 @@ export default function BlogPageList({ allPosts }) {
       <main className="container w-full mt-16 mx-auto">
         <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
-          {allPosts.map((post) => (
+          {postsByPage.map((post) => (
             <div>
               <SinglePost
                 title={post.title}

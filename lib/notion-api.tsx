@@ -1,5 +1,6 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
+import { NUMBER_OF_PER_PAGE } from "../constants/constants";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -67,4 +68,12 @@ export const getPostTopPage = async (pageSize = 4) => {
   const forPosts = allPosts.slice(0, pageSize);
 
   return forPosts;
+};
+
+export const getPostByPage = async (page: number) => {
+  const allPosts = await getAllPosts();
+
+  const startIndex = (page - 1) * NUMBER_OF_PER_PAGE;
+  const endIndex = startIndex + NUMBER_OF_PER_PAGE;
+  return allPosts.slice(startIndex, endIndex);
 };
