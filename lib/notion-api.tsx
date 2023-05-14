@@ -14,6 +14,13 @@ export const getAllPosts = async () => {
   const posts = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     page_size: 100,
+    sorts: [
+      {
+        // Sort posts by last created
+        property: "Date",
+        direction: "descending",
+      },
+    ],
   });
 
   return posts.results.map((post) => {
