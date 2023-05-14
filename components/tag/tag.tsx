@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { AllTags } from "../../type/Post";
 
 type Props = {
-  tags: string[];
+  tags: AllTags;
 };
 
 const Tag = (props: Props) => {
