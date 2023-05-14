@@ -7,6 +7,7 @@ import {
 import SinglePost from "../../../../../components/post/single-post";
 import Pagination from "../../../../../components/pagination/Pagination";
 import Tag from "../../../../../components/tag/tag";
+import { GetStaticPropsContext } from "next";
 
 export const getStaticPaths = async () => {
   const allTags = await getAllTags();
@@ -29,9 +30,21 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
-  const currentPage: string = context.params?.page.toString();
-  const currentTag: string = context.params?.tag.toString();
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  if (context.params === undefined) {
+    throw new Error("context.params is undefined");
+  }
+
+  if (context.params.page === undefined) {
+    throw new Error("context.params.page is undefined");
+  }
+
+  if (context.params.tag === undefined) {
+    throw new Error("context.params.tag is undefined");
+  }
+
+  const currentPage = context.params.page.toString();
+  const currentTag = context.params.tag.toString();
 
   const upperCaseCurrentTag =
     currentTag.charAt(0).toUpperCase() + currentTag.slice(1);
