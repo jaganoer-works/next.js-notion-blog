@@ -22,7 +22,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       post,
     },
-    revalidate: 60 * 60 * 6,
+    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
 };
 
@@ -43,7 +43,7 @@ const Post = ({ post }) => {
         </p>
       ))}
       <div className="markdown mt-10 font-medium">
-      <ReactMarkdown
+        <ReactMarkdown
           components={{
             code({ node, inline, className, children }) {
               const match = /language-(\w+)/.exec(className || "");

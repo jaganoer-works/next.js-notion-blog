@@ -52,7 +52,7 @@ export const getStaticProps = async (context) => {
       currentTag,
       allTags,
     },
-    revalidate: 60 * 60 * 6,
+    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
 };
 

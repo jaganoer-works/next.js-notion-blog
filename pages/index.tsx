@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
       allPosts,
       allTags,
     },
-    revalidate: 10,
+    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
 };
 

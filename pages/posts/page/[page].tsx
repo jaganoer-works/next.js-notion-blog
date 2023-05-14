@@ -34,7 +34,7 @@ export const getStaticProps = async (context: { params: { page: any } }) => {
       numberOfPage,
       allTags,
     },
-    revalidate: 60 * 60 * 6,
+    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
 };
 
