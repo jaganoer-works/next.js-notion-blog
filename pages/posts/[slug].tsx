@@ -39,31 +39,30 @@ const Post = ({ post }) => {
           key={index}
           className="text-white bg-sky-900 rounded-xl font-medium mt-2 px-2 mr-2 inline-block"
         >
-          <Link href={`/posts/tag/${tag}/page/1`}>{tag}</Link>
+          <Link href={`/posts/tag/${tag}`}>{tag}</Link>
         </p>
       ))}
       <div className="markdown mt-10 font-medium">
-        <ReactMarkdown
-          children={post.markdown.parent}
+      <ReactMarkdown
           components={{
-            code({ node, inline, className, children, ...props }) {
+            code({ node, inline, className, children }) {
               const match = /language-(\w+)/.exec(className || "");
               return !inline && match ? (
                 <SyntaxHighlighter
-                  {...props}
-                  children={String(children).replace(/\n$/, "")}
                   style={vscDarkPlus}
                   language={match[1]}
                   PreTag="div"
-                />
+                >
+                  {String(children).replace(/\n$/, "")}
+                </SyntaxHighlighter>
               ) : (
-                <code {...props} className={className}>
-                  {children}
-                </code>
+                <code>{children}</code>
               );
             },
           }}
-        />
+        >
+          {post.markdown}
+        </ReactMarkdown>
 
         <Link href="/">
           <span className="pb-20 block mt-3 text-sky-900">←ホームへ戻る</span>
