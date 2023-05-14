@@ -1,7 +1,6 @@
 import Head from "next/head";
 import {
   getAllTags,
-  getNumberOfPages,
   getNumberOfPagesByTag,
   getPostByTagAndPage,
 } from "../../../../../lib/notion-api";
@@ -23,8 +22,6 @@ export const getStaticPaths = async () => {
     })
   );
 
-  console.log(params);
-
   return {
     paths: params,
     fallback: "blocking",
@@ -43,15 +40,23 @@ export const getStaticProps = async (context) => {
     parseInt(currentPage)
   );
 
+  const numberOfPageByTag = await getNumberOfPagesByTag(upperCaseCurrentTag);
+
   return {
     props: {
       posts,
+      numberOfPageByTag,
+      currentTag,
     },
     revalidate: 60 * 60 * 6,
   };
 };
 
-export default function BlogTagPageList({ numberOfPage, posts }) {
+export default function BlogTagPageList({
+  numberOfPageByTag,
+  posts,
+  currentTag,
+}) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -77,7 +82,7 @@ export default function BlogTagPageList({ numberOfPage, posts }) {
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPage} />
+        <Pagination numberOfPage={numberOfPageByTag} tag={currentTag} />
       </main>
     </div>
   );
