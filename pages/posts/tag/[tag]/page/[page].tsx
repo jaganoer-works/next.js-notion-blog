@@ -42,8 +42,11 @@ export const getStaticProps = async (context) => {
   );
 
   const numberOfPageByTag = await getNumberOfPagesByTag(upperCaseCurrentTag);
-
   const allTags = await getAllTags();
+
+  if (process.env.REVALIDATE_TIME === undefined) {
+    throw new Error("REVALIDATE_TIME is not defined");
+  }
 
   return {
     props: {

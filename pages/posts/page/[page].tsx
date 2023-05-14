@@ -28,6 +28,10 @@ export const getStaticProps = async (context: { params: { page: any } }) => {
   const numberOfPage = await getNumberOfPages();
   const allTags = await getAllTags();
 
+  if (process.env.REVALIDATE_TIME === undefined) {
+    throw new Error("REVALIDATE_TIME is not defined");
+  }
+
   return {
     props: {
       postsByPage,
