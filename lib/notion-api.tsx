@@ -14,6 +14,13 @@ export const getAllPosts = async () => {
   const posts = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
     page_size: 100,
+    filter: {
+      // Filter out archived posts
+      property: "Published",
+      checkbox: {
+        equals: true,
+      },
+    },
     sorts: [
       {
         // Sort posts by last created
