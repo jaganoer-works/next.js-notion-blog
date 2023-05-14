@@ -1,21 +1,23 @@
 import Head from "next/head";
-import { getPostTopPage } from "../lib/notion-api";
+import { getAllTags, getPostTopPage } from "../lib/notion-api";
 import SinglePost from "../components/post/single-post";
 import Link from "next/link";
 import Tag from "../components/tag/tag";
 
 export const getStaticProps = async () => {
   const allPosts = await getPostTopPage();
+  const allTags = await getAllTags();
 
   return {
     props: {
       allPosts,
+      allTags,
     },
     revalidate: 10,
   };
 };
 
-export default function Home({ allPosts }) {
+export default function Home({ allPosts, allTags }) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -26,9 +28,7 @@ export default function Home({ allPosts }) {
       </Head>
 
       <main className="container w-full mt-16">
-        <h1 className="text-5xl font-medium text-center mb-16">
-          Notion Blog🚀
-        </h1>
+        <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
         {allPosts.map((post) => (
           <div key={post.id} className="mx-4">
             <SinglePost
@@ -48,7 +48,7 @@ export default function Home({ allPosts }) {
         >
           ...もっと見る
         </Link>
-        <Tag />
+        <Tag tags={allTags} />
       </main>
     </div>
   );
