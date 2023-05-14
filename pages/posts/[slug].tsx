@@ -39,7 +39,7 @@ const Post = ({ post }) => {
           key={index}
           className="text-white bg-sky-900 rounded-xl font-medium mt-2 px-2 mr-2 inline-block"
         >
-          {tag}
+          <Link href={`/posts/tag/${tag}/page/1`}>{tag}</Link>
         </p>
       ))}
       <div className="markdown mt-10 font-medium">
