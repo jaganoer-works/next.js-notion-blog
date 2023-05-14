@@ -17,7 +17,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const post = await getSingePost(params.slug);
-
+  
+  if(!process.env.REVALIDATE_TIME){
+    throw new Error('REVALIDATE_TIME is not defined')
+  }
+  
   return {
     props: {
       post,
@@ -27,7 +31,6 @@ export const getStaticProps = async ({ params }) => {
 };
 
 const Post = ({ post }) => {
-  console.log(post);
   return (
     <section className="container lg:px-2 px-5 h-screen lg:w-2/5 mx-auto mt-20">
       <h2 className="w-full text-2xl font-medium">{post.metadata.title}</h2>

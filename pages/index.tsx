@@ -7,6 +7,10 @@ import Tag from "../components/tag/tag";
 export const getStaticProps = async () => {
   const allPosts = await getPostTopPage();
   const allTags = await getAllTags();
+  
+  if(!process.env.REVALIDATE_TIME){
+    throw new Error('REVALIDATE_TIME is not defined')
+  }
 
   return {
     props: {
