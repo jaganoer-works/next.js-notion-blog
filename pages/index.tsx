@@ -3,10 +3,15 @@ import { getAllTags, getPostTopPage } from "../lib/notion-api";
 import SinglePost from "../components/post/single-post";
 import Link from "next/link";
 import Tag from "../components/tag/tag";
+import { AllPosts, AllTags, Post } from "../types/Post";
 
 export const getStaticProps = async () => {
   const allPosts = await getPostTopPage();
   const allTags = await getAllTags();
+
+  if (!process.env.REVALIDATE_TIME) {
+    throw new Error("REVALIDATE_TIME is not defined");
+  }
 
   return {
     props: {
@@ -17,7 +22,12 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Home({ allPosts, allTags }) {
+type Props = {
+  allPosts: AllPosts;
+  allTags: AllTags;
+}
+
+export default function Home({ allPosts, allTags }: Props) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -29,7 +39,7 @@ export default function Home({ allPosts, allTags }) {
 
       <main className="container w-full mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
-        {allPosts.map((post) => (
+        {allPosts.map((post: Post) => (
           <div key={post.id} className="mx-4">
             <SinglePost
               title={post.title}

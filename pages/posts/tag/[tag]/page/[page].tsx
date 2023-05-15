@@ -7,11 +7,20 @@ import {
 import SinglePost from "../../../../../components/post/single-post";
 import Pagination from "../../../../../components/pagination/Pagination";
 import Tag from "../../../../../components/tag/tag";
+import { GetStaticPropsContext } from "next";
+import { AllTags, Post } from "../../../../../types/Post";
+
+type Params = {
+  params: {
+    tag: string;
+    page: string;
+  };
+};
 
 export const getStaticPaths = async () => {
   const allTags = await getAllTags();
 
-  let params = [];
+  let params: Params[] = [];
 
   await Promise.all(
     allTags.map((tag) => {
@@ -29,9 +38,21 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
-  const currentPage: string = context.params?.page.toString();
-  const currentTag: string = context.params?.tag.toString();
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  if (context.params === undefined) {
+    throw new Error("context.params is undefined");
+  }
+
+  if (context.params.page === undefined) {
+    throw new Error("context.params.page is undefined");
+  }
+
+  if (context.params.tag === undefined) {
+    throw new Error("context.params.tag is undefined");
+  }
+
+  const currentPage = context.params.page.toString();
+  const currentTag = context.params.tag.toString();
 
   const upperCaseCurrentTag =
     currentTag.charAt(0).toUpperCase() + currentTag.slice(1);
@@ -42,8 +63,11 @@ export const getStaticProps = async (context) => {
   );
 
   const numberOfPageByTag = await getNumberOfPagesByTag(upperCaseCurrentTag);
-
   const allTags = await getAllTags();
+
+  if (process.env.REVALIDATE_TIME === undefined) {
+    throw new Error("REVALIDATE_TIME is not defined");
+  }
 
   return {
     props: {
@@ -56,12 +80,20 @@ export const getStaticProps = async (context) => {
   };
 };
 
+type Props = {
+  posts: Post[];
+  numberOfPageByTag: number;
+  currentTag: string;
+  allTags: AllTags;
+};
+
 export default function BlogTagPageList({
   numberOfPageByTag,
   posts,
   currentTag,
   allTags,
-}) {
+}: Props) {
+  console.log(numberOfPageByTag);
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -74,7 +106,7 @@ export default function BlogTagPageList({
       <main className="container w-full mt-16 mx-auto">
         <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
-          {posts.map((post) => (
+          {posts.map((post: Post) => (
             <div key={post.id}>
               <SinglePost
                 title={post.title}
