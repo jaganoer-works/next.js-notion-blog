@@ -64,7 +64,7 @@ const Post = ({ post }) => {
             },
           }}
         >
-          {post.markdown}
+          {post.markdown.parent}
         </ReactMarkdown>
 
         <Link href="/">
