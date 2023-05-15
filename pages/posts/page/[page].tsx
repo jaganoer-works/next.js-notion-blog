@@ -7,6 +7,8 @@ import {
 import SinglePost from "../../../components/post/single-post";
 import Pagination from "../../../components/pagination/Pagination";
 import Tag from "../../../components/tag/tag";
+import { AllTags, Post } from "../../../types/Post";
+import { GetStaticPropsContext } from "next";
 
 export const getStaticPaths = async () => {
   const numberOfPage = await getNumberOfPages();
@@ -22,8 +24,16 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context: { params: { page: any } }) => {
-  const currentPage = context.params?.page;
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  if (context.params === undefined) {
+    throw new Error("context.params is undefined");
+  }
+
+  if (context.params.page === undefined) {
+    throw new Error("context.params.page is undefined");
+  }
+
+  const currentPage = context.params.page;
   const postsByPage = await getPostByPage(parseInt(currentPage.toString(), 10));
   const numberOfPage = await getNumberOfPages();
   const allTags = await getAllTags();
@@ -42,7 +52,17 @@ export const getStaticProps = async (context: { params: { page: any } }) => {
   };
 };
 
-export default function BlogPageList({ postsByPage, numberOfPage, allTags }) {
+type Props = {
+  postsByPage: Post[];
+  numberOfPage: number;
+  allTags: AllTags;
+};
+
+export default function BlogPageList({
+  postsByPage,
+  numberOfPage,
+  allTags,
+}: Props) {
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
@@ -55,7 +75,7 @@ export default function BlogPageList({ postsByPage, numberOfPage, allTags }) {
       <main className="container w-full mt-16 mx-auto">
         <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
-          {postsByPage.map((post) => (
+          {postsByPage.map((post: Post) => (
             <div key={post.id}>
               <SinglePost
                 title={post.title}
