@@ -3,11 +3,11 @@ import {
   getAllTags,
   getNumberOfPages,
   getPostByPage,
-} from "../../../lib/notion-api";
-import SinglePost from "../../../components/post/single-post";
-import Pagination from "../../../components/pagination/Pagination";
-import Tag from "../../../components/tag/tag";
-import { AllTags, Post } from "../../../types/Post";
+} from "@/lib/notion-api";
+import SinglePost from "@/components/post/single-post";
+import Pagination from "@/components/pagination/Pagination";
+import Tag from "@/components/tag/tag";
+import { AllTags, Post } from "@/types/Post";
 import { GetStaticPropsContext } from "next";
 
 export const getStaticPaths = async () => {
