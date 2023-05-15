@@ -11,8 +11,14 @@ const n2m = new NotionToMarkdown({
 });
 
 export const getAllPosts = async () => {
+  const databaseId = process.env.NOTION_DATABASE_ID;
+
+  if (typeof databaseId === "undefined") {
+    throw new Error("Database ID is not defined.");
+  }
+
   const posts = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID,
+    database_id: databaseId,
     page_size: 100,
     filter: {
       // Filter out archived posts
@@ -52,8 +58,14 @@ const getPageMetaData = (post) => {
 };
 
 export const getSingePost = async (slug) => {
+  const databaseId = process.env.NOTION_DATABASE_ID;
+
+  if (typeof databaseId === "undefined") {
+    throw new Error("Database ID is not defined.");
+  }
+
   const response = await notion.databases.query({
-    database_id: process.env.NOTION_DATABASE_ID,
+    database_id: databaseId,
     filter: {
       property: "Slug",
       formula: {
