@@ -25,7 +25,7 @@ export const getStaticProps = async () => {
 type Props = {
   allPosts: AllPosts;
   allTags: AllTags;
-}
+};
 
 export default function Home({ allPosts, allTags }: Props) {
   return (
@@ -39,9 +39,10 @@ export default function Home({ allPosts, allTags }: Props) {
 
       <main className="container w-full mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">Blogs</h1>
-        {allPosts.map((post: Post) => (
-          <div key={post.id} className="mx-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mx-5 mb-5">
+          {allPosts.map((post: Post) => (
             <SinglePost
+              key={post.id}
               title={post.title}
               description={post.description}
               date={post.date}
@@ -49,12 +50,12 @@ export default function Home({ allPosts, allTags }: Props) {
               slug={post.slug}
               isPagination={false}
             />
-          </div>
-        ))}
+          ))}
+        </div>
 
         <Link
           href="/posts/page/1"
-          className="mb-6 lg:w-1/2 mx-auto px-5 block text-right"
+          className="mb-6 mx-auto px-5 block text-right"
         >
           ...もっと見る
         </Link>
