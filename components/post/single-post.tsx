@@ -33,13 +33,13 @@ const SinglePost = (props: Props) => {
           <p className="text-gray-100">{description}</p>
         </section>
       ) : (
-        <section className="border-2 border-gray-200 border-opacity-60 rounded-md p-5 shadow-2xl hover:shadow-none hover:translate-y-1 transition-all duration-300">
+        <section className="border border-solid border-gray-200 rounded-md p-5 bg-white">
           <div className="flex items-center gap-3">
-            <h2 className="text-gray-500 text-2xl font-medium mb-2">
+            <h2 className="text-gray-900 text-2xl mb-2 font-bold">
               <Link href={`posts/${slug}`}>{title}</Link>
             </h2>
           </div>
-          <p className="text-gray-500 mb-2">{description}</p>
+          <p className="text-gray-900 mb-2">{description}</p>
           <div className="text-right mb-2">
             {tags.map((tag: string, index: number) => (
               <Link key={index} href={`/posts/tag/${tag}/page/1`}>
