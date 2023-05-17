@@ -49,7 +49,7 @@ const SinglePost = (props: Props) => {
               </Link>
             ))}
           </div>
-          <div className="text-gray-500 text-right">{date}</div>
+          <div className="text-gray-900 text-right">{date}</div>
         </section>
       )}
     </>
