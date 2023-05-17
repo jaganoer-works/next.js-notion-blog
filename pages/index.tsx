@@ -37,9 +37,9 @@ export default function Home({ allPosts, allTags }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container w-full mt-16">
+      <main className="container lg:w-5/6 mx-auto mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">Blogs</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mx-5 mb-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-5 mb-5">
           {allPosts.map((post: Post) => (
             <SinglePost
               key={post.id}
