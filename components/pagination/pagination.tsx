@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { getPageLink } from "./pagination/blog-helper";
+import { getPageLink } from "./blog-helper";
 
 type Props = {
   numberOfPage: number;
