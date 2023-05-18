@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { getAllTags, getNumberOfPages, getPostByPage } from "@/lib/notion-api";
 import SinglePost from "@/components/post/single-post";
-import Pagination from "@/components/pagination/pagination";
+import Pagination from "@/components/pagination";
 import Tag from "@/components/tag/tag";
 import { AllTags, Post } from "@/types/Post";
 import { GetStaticPropsContext } from "next";
