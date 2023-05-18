@@ -47,6 +47,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       postsByPage,
       numberOfPage,
       allTags,
+      currentPage: parseInt(currentPage.toString(), 10),
     },
     revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
@@ -56,12 +57,14 @@ type Props = {
   postsByPage: Post[];
   numberOfPage: number;
   allTags: AllTags;
+  currentPage: number;
 };
 
 export default function BlogPageList({
   postsByPage,
   numberOfPage,
   allTags,
+  currentPage,
 }: Props) {
   return (
     <div className="container h-full w-full mx-auto">
@@ -73,7 +76,7 @@ export default function BlogPageList({
       </Head>
 
       <main className="container w-full mt-16 mx-auto">
-        <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">Blogs</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
           {postsByPage.map((post: Post) => (
             <div key={post.id}>
@@ -88,7 +91,7 @@ export default function BlogPageList({
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPage} tag={""} />
+        <Pagination numberOfPage={numberOfPage} tag={""} currentPage={currentPage} />
         <Tag tags={allTags} />
       </main>
     </div>

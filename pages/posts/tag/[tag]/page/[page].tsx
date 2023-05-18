@@ -75,6 +75,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       numberOfPageByTag,
       currentTag,
       allTags,
+      currentPage: parseInt(currentPage, 10),
     },
     revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
@@ -85,6 +86,7 @@ type Props = {
   numberOfPageByTag: number;
   currentTag: string;
   allTags: AllTags;
+  currentPage: number;
 };
 
 export default function BlogTagPageList({
@@ -92,6 +94,7 @@ export default function BlogTagPageList({
   posts,
   currentTag,
   allTags,
+  currentPage,
 }: Props) {
   return (
     <div className="container h-full w-full mx-auto">
@@ -118,7 +121,7 @@ export default function BlogTagPageList({
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPageByTag} tag={currentTag} />
+        <Pagination numberOfPage={numberOfPageByTag} tag={currentTag} currentPage={currentPage} />
         <Tag tags={allTags} />
       </main>
     </div>
