@@ -1,13 +1,9 @@
 import Head from "next/head";
-import {
-  getAllTags,
-  getNumberOfPages,
-  getPostByPage,
-} from "../../../lib/notion-api";
-import SinglePost from "../../../components/post/single-post";
-import Pagination from "../../../components/pagination/Pagination";
-import Tag from "../../../components/tag/tag";
-import { AllTags, Post } from "../../../types/Post";
+import { getAllTags, getNumberOfPages, getPostByPage } from "@/lib/notion-api";
+import SinglePost from "@/components/post/single-post";
+import Pagination from "@/components/pagination/pagination";
+import Tag from "@/components/tag/tag";
+import { AllTags, Post } from "@/types/Post";
 import { GetStaticPropsContext } from "next";
 
 export const getStaticPaths = async () => {
@@ -47,6 +43,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       postsByPage,
       numberOfPage,
       allTags,
+      currentPage: parseInt(currentPage.toString(), 10),
     },
     revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
   };
@@ -56,12 +53,14 @@ type Props = {
   postsByPage: Post[];
   numberOfPage: number;
   allTags: AllTags;
+  currentPage: number;
 };
 
 export default function BlogPageList({
   postsByPage,
   numberOfPage,
   allTags,
+  currentPage,
 }: Props) {
   return (
     <div className="container h-full w-full mx-auto">
@@ -73,7 +72,7 @@ export default function BlogPageList({
       </Head>
 
       <main className="container w-full mt-16 mx-auto">
-        <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">Blogs</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
           {postsByPage.map((post: Post) => (
             <div key={post.id}>
@@ -83,12 +82,15 @@ export default function BlogPageList({
                 date={post.date}
                 tags={post.tags}
                 slug={post.slug}
-                isPagination={true}
               />
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPage} tag={""} />
+        <Pagination
+          numberOfPage={numberOfPage}
+          tag={""}
+          currentPage={currentPage}
+        />
         <Tag tags={allTags} />
       </main>
     </div>
