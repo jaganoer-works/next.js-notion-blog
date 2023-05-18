@@ -93,7 +93,6 @@ export default function BlogTagPageList({
   currentTag,
   allTags,
 }: Props) {
-  console.log(numberOfPageByTag);
   return (
     <div className="container h-full w-full mx-auto">
       <Head>
