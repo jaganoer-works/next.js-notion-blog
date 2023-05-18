@@ -1,9 +1,5 @@
 import Head from "next/head";
-import {
-  getAllTags,
-  getNumberOfPages,
-  getPostByPage,
-} from "@/lib/notion-api";
+import { getAllTags, getNumberOfPages, getPostByPage } from "@/lib/notion-api";
 import SinglePost from "@/components/post/single-post";
 import Pagination from "@/components/pagination/pagination";
 import Tag from "@/components/tag/tag";
@@ -86,12 +82,15 @@ export default function BlogPageList({
                 date={post.date}
                 tags={post.tags}
                 slug={post.slug}
-                isPagination={true}
               />
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPage} tag={""} currentPage={currentPage} />
+        <Pagination
+          numberOfPage={numberOfPage}
+          tag={""}
+          currentPage={currentPage}
+        />
         <Tag tags={allTags} />
       </main>
     </div>

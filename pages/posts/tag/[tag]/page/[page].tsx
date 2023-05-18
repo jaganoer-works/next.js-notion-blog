@@ -106,7 +106,7 @@ export default function BlogTagPageList({
       </Head>
 
       <main className="container w-full mt-16 mx-auto">
-        <h1 className="text-5xl font-medium text-center mb-16">Notion Blog</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">Blogs</h1>
         <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
           {posts.map((post: Post) => (
             <div key={post.id}>
@@ -116,12 +116,15 @@ export default function BlogTagPageList({
                 date={post.date}
                 tags={post.tags}
                 slug={post.slug}
-                isPagination={true}
               />
             </div>
           ))}
         </section>
-        <Pagination numberOfPage={numberOfPageByTag} tag={currentTag} currentPage={currentPage} />
+        <Pagination
+          numberOfPage={numberOfPageByTag}
+          tag={currentTag}
+          currentPage={currentPage}
+        />
         <Tag tags={allTags} />
       </main>
     </div>

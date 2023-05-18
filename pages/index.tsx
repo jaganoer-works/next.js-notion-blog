@@ -48,7 +48,6 @@ export default function Home({ allPosts, allTags }: Props) {
               date={post.date}
               tags={post.tags}
               slug={post.slug}
-              isPagination={false}
             />
           ))}
         </div>
