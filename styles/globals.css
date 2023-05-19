@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #f4f5f8;
-}
 
 h2 {
   font-size: 1.4rem;
