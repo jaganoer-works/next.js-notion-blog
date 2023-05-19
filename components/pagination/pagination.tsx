@@ -27,7 +27,7 @@ const Pagination = (props: Props) => {
     <section className="flex place-content-center mb-5">
       <div className="btn-group">
         {pages.map((page) => (
-          <Link href={getPageLink(tag, page)} legacyBehavior>
+          <Link key={page} href={getPageLink(tag, page)} legacyBehavior>
             {page === currentPage ? (
               <a className="btn btn-active">{page}</a>
             ) : (
