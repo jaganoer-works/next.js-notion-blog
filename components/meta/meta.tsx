@@ -20,7 +20,7 @@ const Meta = ({ pageTitle, pageDesc }: MetaProps) => {
       <title>{title}</title>
       <meta property="og:title" content={title} />
       <meta property="og:description" content={desc} />
-      <link ref="canonical" href={url} />
+      <link rel="canonical" href={url} />
       <meta property="og:url" content={url} />
       <meta property="og:site_name" content={siteTitle} />
       <meta property="og:type" content={siteType} />
