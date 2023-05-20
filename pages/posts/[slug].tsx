@@ -17,11 +17,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const post = await getSingePost(params.slug);
-  
-  if(!process.env.REVALIDATE_TIME){
-    throw new Error('REVALIDATE_TIME is not defined')
+
+  if (!process.env.REVALIDATE_TIME) {
+    throw new Error("REVALIDATE_TIME is not defined");
   }
-  
+
   return {
     props: {
       post,
@@ -32,20 +32,20 @@ export const getStaticProps = async ({ params }) => {
 
 const Post = ({ post }) => {
   return (
-    <section className="container lg:px-2 px-5 h-screen lg:w-2/5 mx-auto mt-20">
-      <h2 className="w-full text-2xl font-medium">{post.metadata.title}</h2>
-      <div className="border-b-2"></div>
-      <span className="text-gray-500">Posted date at {post.metadata.date}</span>
-      <br />
-      {post.metadata.tags.map((tag: string, index: number) => (
-        <p
-          key={index}
-          className="text-white bg-sky-900 rounded-xl font-medium mt-2 px-2 mr-2 inline-block"
-        >
-          <Link href={`/posts/tag/${tag}`}>{tag}</Link>
-        </p>
-      ))}
-      <div className="markdown mt-10 font-medium">
+    <section className="container lg:px-5 px-5 h-screen lg:w-3/5 mx-auto mt-20">
+      <h1 className="w-full text-3xl font-bold">{post.metadata.title}</h1>
+      <div className="border-b-2 mb-5"></div>
+      <div className="text-right mb-2">
+        {post.metadata.tags.map((tag: string, index: number) => (
+          <div key={index} className="badge badge-secondary p-2 mr-2">
+            <Link href={`/posts/tag/${tag}`}>{tag}</Link>
+          </div>
+        ))}
+      </div>
+      <div className="stat-desc text-right text-lg mb-10">
+        {post.metadata.date}
+      </div>
+      <div className="markdown font-medium">
         <ReactMarkdown
           components={{
             code({ node, inline, className, children }) {
@@ -68,7 +68,7 @@ const Post = ({ post }) => {
         </ReactMarkdown>
 
         <Link href="/">
-          <span className="pb-20 block mt-3 text-sky-900">←ホームへ戻る</span>
+          <span className="pb-20 block mt-3 text-right">←ホームへ戻る</span>
         </Link>
       </div>
     </section>
