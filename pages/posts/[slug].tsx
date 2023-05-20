@@ -2,7 +2,7 @@ import React from "react";
 import { getAllPosts, getSingePost } from "@/lib/notion-api";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import Link from "next/link";
 
 export const getStaticPaths = async () => {
@@ -52,7 +52,7 @@ const Post = ({ post }) => {
               const match = /language-(\w+)/.exec(className || "");
               return !inline && match ? (
                 <SyntaxHighlighter
-                  style={vscDarkPlus}
+                  style={okaidia}
                   language={match[1]}
                   PreTag="div"
                 >
