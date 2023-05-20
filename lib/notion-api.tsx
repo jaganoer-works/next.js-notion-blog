@@ -57,7 +57,7 @@ const getPageMetaData = (post) => {
   };
 };
 
-export const getSingePost = async (slug) => {
+export const getSingePost = async (slug: string) => {
   const databaseId = process.env.NOTION_DATABASE_ID;
 
   if (typeof databaseId === "undefined") {

@@ -1,6 +1,6 @@
 import { getAllTags, getPostTopPage } from "@/lib/notion-api";
 import Link from "next/link";
-import { AllPosts, AllTags, Post } from "@/types/Post";
+import { AllPosts, AllTags, Post } from "@/types/post";
 import Tag from "@/components/tag/tag";
 import SinglePost from "@/components/post/single-post";
 import Meta from "@/components/meta/meta";

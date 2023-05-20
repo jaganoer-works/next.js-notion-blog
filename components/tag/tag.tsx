@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { AllTags } from "@/types/Post";
+import { AllTags } from "@/types/post";
 
 type Props = {
   tags: AllTags;
