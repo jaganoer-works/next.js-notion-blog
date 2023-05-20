@@ -78,10 +78,8 @@ export const getSingePost = async (slug) => {
 
   const page = response.results[0];
   const metadata = getPageMetaData(page);
-  // console.log(metadata);
   const mdBlocks = await n2m.pageToMarkdown(page.id);
   const mbString = n2m.toMarkdownString(mdBlocks);
-  // console.log(mbString);
 
   return {
     metadata,

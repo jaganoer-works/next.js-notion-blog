@@ -16,13 +16,6 @@ const Pagination = (props: Props) => {
     pages.push(i);
   }
 
-  // const isCurrentPage = (page: number) => {
-  //   if (page === currentPage) {
-  //     return "bg-white border border-gray-500 rounded-lg w-10 h-10 text-gray-500 relative";
-  //   }
-  //   return "bg-blue-500 rounded-lg w-10 h-10 text-gray-100 relative hover:bg-white hover:text-gray-500 hover:border hover:border-gray-500";
-  // };
-
   return (
     <section className="flex place-content-center mb-5">
       <div className="btn-group">
