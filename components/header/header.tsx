@@ -2,7 +2,7 @@ import Navbar from "../navbar/navbar";
 
 const Header = () => {
   return (
-    <header className="shadow-2xl">
+    <header>
       <Navbar />
     </header>
   );

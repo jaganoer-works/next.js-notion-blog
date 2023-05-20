@@ -71,9 +71,9 @@ export default function BlogPageList({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container w-full mt-16 mx-auto">
+      <main className="container lg:w-5/6 mx-auto mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">Blogs</h1>
-        <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-5 mb-5">
           {postsByPage.map((post: Post) => (
             <div key={post.id}>
               <SinglePost
