@@ -20,3 +20,9 @@ export type AllTags = {
   ): import("react").ReactNode;
   allTags: string[];
 };
+
+export type NotionTag = {
+  id: string;
+  name: string;
+  color: string;
+};
