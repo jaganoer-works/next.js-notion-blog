@@ -7,7 +7,6 @@ import { GetStaticPropsContext } from "next";
 import { AllTags, Post } from "@/types/types";
 import SinglePost from "@/components/post/single-post";
 import Pagination from "@/components/pagination/pagination";
-import Tag from "@/components/tag/tag";
 import Meta from "@/components/meta/meta";
 
 type Params = {
@@ -93,15 +92,14 @@ export default function BlogTagPageList({
   numberOfPageByTag,
   posts,
   currentTag,
-  allTags,
   currentPage,
 }: Props) {
   return (
     <div className="container h-full w-full mx-auto">
-      <Meta pageTitle="tags" pageDesc="タグで絞り込む" />
+      <Meta pageTitle={`${currentTag}の検索結果`} pageDesc={`${currentTag}の検索結果`} />
 
       <main className="container lg:w-5/6 mx-auto mt-16">
-        <h1 className="text-5xl font-medium text-center mb-16">Tags</h1>
+        <h1 className="text-5xl font-medium text-center mb-16">{`${currentTag}の検索結果`}</h1>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-5 mb-5">
           {posts.map((post: Post) => (
             <div key={post.id}>
@@ -120,7 +118,6 @@ export default function BlogTagPageList({
           tag={currentTag}
           currentPage={currentPage}
         />
-        <Tag tags={allTags} />
       </main>
     </div>
   );

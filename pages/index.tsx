@@ -1,7 +1,6 @@
 import { getAllTags, getPostTopPage } from "@/lib/notion";
 import Link from "next/link";
 import { AllPosts, AllTags, Post } from "@/types/types";
-import Tag from "@/components/tag/tag";
 import SinglePost from "@/components/post/single-post";
 import Meta from "@/components/meta/meta";
 
@@ -53,7 +52,6 @@ export default function Home({ allPosts, allTags }: Props) {
         >
           ...もっと見る
         </Link>
-        <Tag tags={allTags} />
       </main>
     </div>
   );
