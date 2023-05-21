@@ -86,7 +86,6 @@ export default function BlogPageList({
           tag={""}
           currentPage={currentPage}
         />
-        <Tag tags={allTags} />
       </main>
     </div>
   );
