@@ -62,7 +62,7 @@ const Post = ({ post }: PostProps) => {
           </ReactMarkdown>
 
           <Link href="/">
-            <span className="pb-20 block mt-3 text-right">←ホームへ戻る</span>
+            <span className="link link-info pb-20 block mt-3 text-right">←ホームへ戻る</span>
           </Link>
         </div>
       </section>
