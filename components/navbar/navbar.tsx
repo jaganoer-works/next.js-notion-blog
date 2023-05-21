@@ -18,6 +18,13 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link href="/tags">Tags</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
