@@ -5,32 +5,21 @@ import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import Link from "next/link";
 import Meta from "@/components/meta/meta";
 
-export const getStaticPaths = async () => {
-  const allPost = await getAllPosts();
-  const paths = allPost.map(({ slug }) => ({ params: { slug } }));
-
-  return {
-    paths,
-    fallback: "blocking",
+type PostProps = {
+  post: {
+    metadata: {
+      title: string;
+      description: string;
+      date: string;
+      tags: string[];
+    };
+    markdown: {
+      parent: string;
+    };
   };
 };
 
-export const getStaticProps = async ({ params }) => {
-  const post = await getSingePost(params.slug);
-
-  if (!process.env.REVALIDATE_TIME) {
-    throw new Error("REVALIDATE_TIME is not defined");
-  }
-
-  return {
-    props: {
-      post,
-    },
-    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
-  };
-};
-
-const Post = ({ post }) => {
+const Post = ({ post }: PostProps) => {
   return (
     <>
       <Meta
@@ -82,3 +71,34 @@ const Post = ({ post }) => {
 };
 
 export default Post;
+
+export const getStaticPaths = async () => {
+  const allPost = await getAllPosts();
+  const paths = allPost.map(({ slug }) => ({ params: { slug } }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+
+export const getStaticProps = async ({ params }: Params) => {
+  const post = await getSingePost(params.slug);
+
+  if (!process.env.REVALIDATE_TIME) {
+    throw new Error("REVALIDATE_TIME is not defined");
+  }
+
+  return {
+    props: {
+      post,
+    },
+    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
+  };
+};
