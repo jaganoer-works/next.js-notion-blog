@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Header from "./header/header";
+import Footer from "./footer/footer";
 
 type LayoutProps = {
   children: ReactNode;
@@ -7,10 +8,11 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <div>{children}</div>
-    </>
+      <div className="flex-grow">{children}</div>
+      <Footer />
+    </div>
   );
 };
 
