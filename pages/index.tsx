@@ -48,7 +48,7 @@ export default function Home({ allPosts, allTags }: Props) {
 
         <Link
           href="/posts/page/1"
-          className="mb-6 mx-auto px-5 block text-right"
+          className="link link-info mb-6 mx-auto px-5 block text-right"
         >
           ...もっと見る
         </Link>
