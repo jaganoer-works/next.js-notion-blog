@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/constants/constants";
-import { NotionTag } from "@/types/post";
+import { NotionTag } from "@/types/types";
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -41,12 +41,6 @@ export const getAllPosts = async () => {
     return getPageMetaData(post);
   });
 };
-
-type Tags = {
-  name: string;
-  slug: string;
-}
-
 
 const getPageMetaData = (post:any) => {
   const getTags = (tags:NotionTag[]) => {

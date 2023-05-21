@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { AllTags } from "@/types/post";
+import { AllTags } from "@/types/types";
 
-type Props = {
+type TagProps = {
   tags: AllTags;
 };
 
-const Tag = (props: Props) => {
+const Tag = (props: TagProps) => {
   const { tags } = props;
 
   return (

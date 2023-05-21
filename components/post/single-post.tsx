@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-type Props = {
+type SinglePostProps = {
   title: string;
   description: string;
   date: string;
@@ -9,7 +9,7 @@ type Props = {
   slug: string;
 };
 
-const SinglePost = (props: Props) => {
+const SinglePost = (props: SinglePostProps) => {
   const { title, description, date, tags, slug } = props;
   return (
     <div className="card w-full bg-primary text-primary-content">
