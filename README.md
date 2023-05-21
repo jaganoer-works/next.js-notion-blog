@@ -64,7 +64,10 @@ https://www.notion.so/my-integrations
 
 ↓
 
-ページの URL の末尾の ID をコピーする。下記のアドレスの場合、`8325b684cd784b76a0fa0b7f8547f5e3`がデータベースの ID になる。
+ページの URL の末尾の ID をコピーする。
+
+下記のアドレスの場合、`8325b684cd784b76a0fa0b7f8547f5e3`がデータベースの ID になる。
+
 https://www.notion.so/8325b684cd784b76a0fa0b7f8547f5e3?v=450643058b4648b1856cbad68a1e4f21
 
 ↓
