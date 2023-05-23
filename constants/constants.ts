@@ -6,5 +6,5 @@ export const SITE_META = {
   siteURL: "https://jaganoer-works.vercel.app/", // TODO: Change this to your own domain
   siteLocale: "ja",
   siteType: "website",
-  siteIcon: "/favicon.ico",
+  siteIcon: "/favicon.svg",
 };
