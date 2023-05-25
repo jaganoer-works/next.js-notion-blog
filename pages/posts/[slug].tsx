@@ -26,7 +26,7 @@ const Post = ({ post }: PostProps) => {
         pageTitle={post.metadata.title}
         pageDesc={post.metadata.description}
       />
-      <section className="container lg:px-5 px-5 g:w-3/5 mx-auto mt-20">
+      <section className="container lg:px-5 px-5 lg:w-3/5 mx-auto mt-20">
         <h1 className="w-full text-3xl font-bold">{post.metadata.title}</h1>
         <div className="border-b-2 mb-5"></div>
         <div className="text-right mb-2">
