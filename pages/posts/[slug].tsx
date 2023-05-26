@@ -32,7 +32,7 @@ const Post = ({ post }: PostProps) => {
         <div className="text-right mb-2">
           {post.metadata.tags.map((tag: string, index: number) => (
             <div key={index} className="badge badge-secondary p-2 mr-2">
-              <Link href={`/posts/tag/${tag}`}>{tag}</Link>
+              <Link href={`/posts/tag/${tag}/page/1`}>{tag}</Link>
             </div>
           ))}
         </div>
