@@ -13,8 +13,10 @@
 }
 
 .markdown img {
+  display: block;
   width: 100%;
-  object-fit: cover;
+  height: 350px;
+  object-fit: scale-down;
   margin: 1.5rem auto;
 }
 
