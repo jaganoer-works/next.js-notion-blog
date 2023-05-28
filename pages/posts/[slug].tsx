@@ -39,7 +39,7 @@ const Post = ({ post }: PostProps) => {
         <div className="stat-desc text-right text-lg mb-10">
           {post.metadata.date}
         </div>
-        <div className="prose mx-auto">
+        <div className="prose prose-lg mx-auto">
           <ReactMarkdown
             components={{
               code({ node, inline, className, children }) {
