@@ -96,21 +96,23 @@ export default function BlogTagPageList({
 }: Props) {
   return (
     <div className="container h-full w-full mx-auto">
-      <Meta pageTitle={`${currentTag}の検索結果`} pageDesc={`${currentTag}の検索結果`} />
+      <Meta
+        pageTitle={`${currentTag}の検索結果`}
+        pageDesc={`${currentTag}の検索結果`}
+      />
 
       <main className="container lg:w-5/6 mx-auto mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">{`${currentTag}の検索結果`}</h1>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-5 mb-5">
           {posts.map((post: Post) => (
-            <div key={post.id}>
               <SinglePost
+                key={post.id}
                 title={post.title}
                 description={post.description}
                 date={post.date}
                 tags={post.tags}
                 slug={post.slug}
               />
-            </div>
           ))}
         </section>
         <Pagination
