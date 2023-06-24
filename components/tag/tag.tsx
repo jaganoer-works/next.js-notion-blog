@@ -1,14 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { AllTags } from "@/types/types";
 
 type TagProps = {
-  tags: AllTags;
+  tags: string[];
 };
 
-const Tag = (props: TagProps) => {
-  const { tags } = props;
-
+const Tag = ({ tags }: TagProps) => {
   return (
     <div className="mx-4">
       <section className="card w-full bg-primary text-primary-content p-5">
