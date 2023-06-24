@@ -1,25 +1,18 @@
-import { getAllPosts, getSingePost } from "@/lib/notion";
+import { getSingePost } from "@/lib/notion";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
+import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import Link from "next/link";
 import Meta from "@/components/meta/meta";
 
-type PostProps = {
-  post: {
-    metadata: {
-      title: string;
-      description: string;
-      date: string;
-      tags: string[];
-    };
-    markdown: {
-      parent: string;
-    };
+const Post = async ({
+  params,
+}: {
+  params: {
+    slug: string;
   };
-};
-
-const Post = ({ post }: PostProps) => {
+}) => {
+  const post = await getSingePost(params.slug);
   return (
     <>
       <Meta
@@ -46,7 +39,7 @@ const Post = ({ post }: PostProps) => {
                 const match = /language-(\w+)/.exec(className || "");
                 return !inline && match ? (
                   <SyntaxHighlighter
-                    style={okaidia}
+                    style={monokai}
                     language={match[1]}
                     PreTag="div"
                   >
@@ -73,34 +66,3 @@ const Post = ({ post }: PostProps) => {
 };
 
 export default Post;
-
-export const getStaticPaths = async () => {
-  const allPost = await getAllPosts();
-  const paths = allPost.map(({ slug }) => ({ params: { slug } }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
-
-type Params = {
-  params: {
-    slug: string;
-  };
-};
-
-export const getStaticProps = async ({ params }: Params) => {
-  const post = await getSingePost(params.slug);
-
-  if (!process.env.REVALIDATE_TIME) {
-    throw new Error("REVALIDATE_TIME is not defined");
-  }
-
-  return {
-    props: {
-      post,
-    },
-    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
-  };
-};
