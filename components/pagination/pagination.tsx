@@ -5,12 +5,11 @@ import { getPageLink } from "./blog-helper";
 type Props = {
   numberOfPage: number;
   tag: string;
-  currentPage: number;
+  currentPage: string;
 };
 
 const Pagination = (props: Props) => {
   const { numberOfPage, tag, currentPage } = props;
-
   let pages: number[] = [];
   for (let i = 1; i <= numberOfPage; i++) {
     pages.push(i);
@@ -21,7 +20,7 @@ const Pagination = (props: Props) => {
       <div className="btn-group">
         {pages.map((page) => (
           <Link key={page} href={getPageLink(tag, page)} legacyBehavior>
-            {page === currentPage ? (
+            {page === Number(currentPage) ? (
               <a className="btn btn-active">{page}</a>
             ) : (
               <a className="btn">{page}</a>
