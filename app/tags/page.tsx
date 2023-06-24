@@ -1,28 +1,9 @@
 import { getAllTags } from "@/lib/notion";
 import Meta from "@/components/meta/meta";
 import Tag from "@/components/tag/tag";
-import { AllTags } from "@/types/types";
 
-export const getStaticProps = async () => {
+const Tags = async () => {
   const allTags = await getAllTags();
-
-  if (!process.env.REVALIDATE_TIME) {
-    throw new Error("REVALIDATE_TIME is not defined");
-  }
-
-  return {
-    props: {
-      allTags,
-    },
-    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
-  };
-};
-
-type TagsProps = {
-  allTags: AllTags;
-};
-
-const Tags = ({ allTags }: TagsProps) => {
   return (
     <div className="container h-full w-full mx-auto">
       <Meta pageTitle="Tags" />
