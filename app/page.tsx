@@ -1,32 +1,11 @@
-import { getAllTags, getPostTopPage } from "@/lib/notion";
+import { getPostTopPage } from "@/lib/notion";
 import Link from "next/link";
-import { AllPosts, AllTags, Post } from "@/types/types";
+import { Post } from "@/types/types";
 import SinglePost from "@/components/post/single-post";
 import Meta from "@/components/meta/meta";
 
-export const getStaticProps = async () => {
-  const allPosts = await getPostTopPage();
-  const allTags = await getAllTags();
-
-  if (!process.env.REVALIDATE_TIME) {
-    throw new Error("REVALIDATE_TIME is not defined");
-  }
-
-  return {
-    props: {
-      allPosts,
-      allTags,
-    },
-    revalidate: parseInt(process.env.REVALIDATE_TIME, 10),
-  };
-};
-
-type Props = {
-  allPosts: AllPosts;
-  allTags: AllTags;
-};
-
-export default function Home({ allPosts, allTags }: Props) {
+export default async function Home() {
+    const allPosts = await getPostTopPage();
   return (
     <div className="container h-full w-full mx-auto">
       <Meta pageTitle="Home" />

@@ -1,5 +1,6 @@
+"use client";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { SITE_META } from "@/constants/constants";
 
 type MetaProps = {
@@ -12,8 +13,8 @@ const Meta = ({ pageTitle, pageDesc }: MetaProps) => {
     SITE_META;
   const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
   const desc = pageDesc ?? siteDesc;
-  const router = useRouter();
-  const url = `${siteURL}${router.asPath}`;
+  const searchParams = useSearchParams();
+  const url = `${siteURL}${searchParams?.toString() ?? ""}`;
 
   return (
     <Head>
