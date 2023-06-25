@@ -1,6 +1,5 @@
 import { getPostTopPage } from "@/lib/notion";
 import Link from "next/link";
-import { Post } from "@/types/types";
 import SinglePost from "@/components/post/single-post";
 import Meta from "@/components/meta/meta";
 
@@ -13,7 +12,7 @@ export default async function Home() {
       <main className="container lg:w-5/6 mx-auto mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">Home</h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-5 mb-5">
-          {allPosts.map((post: Post) => (
+          {allPosts.map((post) => (
             <SinglePost
               key={post.id}
               title={post.title}

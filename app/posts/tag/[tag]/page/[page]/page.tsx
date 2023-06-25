@@ -1,19 +1,16 @@
 import { getNumberOfPagesByTag, getPostByTagAndPage } from "@/lib/notion";
-import { Post } from "@/types/types";
 import SinglePost from "@/components/post/single-post";
 import Pagination from "@/components/pagination/pagination";
 import Meta from "@/components/meta/meta";
 
-type BlogTagPageListProps = {
+type Params = {
   params: {
     tag: string;
     page: string;
   };
 };
 
-export default async function BlogTagPageList({
-  params,
-}: BlogTagPageListProps) {
+export default async function BlogTagPageList({ params }: Params) {
   const posts = await getPostByTagAndPage(params.tag, Number(params.page));
   const currentTag = params.tag;
   const currentPage = params.page;
@@ -28,7 +25,7 @@ export default async function BlogTagPageList({
       <main className="container lg:w-5/6 mx-auto mt-16">
         <h1 className="text-5xl font-medium text-center mb-16">{`${currentTag}の検索結果`}</h1>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-5 mb-5">
-          {posts.map((post: Post) => (
+          {posts.map((post) => (
             <SinglePost
               key={post.id}
               title={post.title}

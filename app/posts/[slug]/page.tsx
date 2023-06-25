@@ -5,13 +5,13 @@ import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import Link from "next/link";
 import Meta from "@/components/meta/meta";
 
-const Post = async ({
-  params,
-}: {
+type Params = {
   params: {
     slug: string;
   };
-}) => {
+};
+
+const Post = async ({ params }: Params) => {
   const post = await getSingePost(params.slug);
   return (
     <>
