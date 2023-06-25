@@ -32,7 +32,7 @@ const Post = async ({
         <div className="stat-desc text-right text-lg mb-10">
           {post.metadata.date}
         </div>
-        <div className="prose prose-lg mx-auto">
+        <div className="prose prose-xl mx-auto w-full">
           <ReactMarkdown
             components={{
               code({ node, inline, className, children }) {
